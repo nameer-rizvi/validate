@@ -1,9 +1,8 @@
-// todo
-import { ValidationOptions } from "./interfaces";
-import validateWhitelist from "./validate.whitelist";
+import { type ValidationOptions } from "./interfaces.js";
+import validateWhitelist from "./validate.whitelist.js";
 import * as utils from "@nameer/utils";
 
-function validateWhitelistKeys({ value, ...rest }: ValidationOptions) {
+function validateWhitelistKeys({ value, ...rest }: ValidationOptions): void {
   try {
     if (utils.isObject(value)) {
       validateWhitelist({ value: Object.keys(value), ...rest });
