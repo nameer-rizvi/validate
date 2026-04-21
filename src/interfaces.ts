@@ -42,7 +42,7 @@ export type PayloadObject = Record<string, unknown>;
 
 export type RequiredList = readonly string[];
 
-// export type StringOrArray<T = string> = T | readonly T[];
+export type StringOrArray<T = string> = T | readonly T[];
 
 export type ValidationResolver = Record<
   string,
@@ -94,8 +94,8 @@ export interface Definition {
   readonly ignoreSanitizer?: boolean;
   readonly ignoreSanitizerValidation?: boolean;
   readonly domPurifyOptions?: DOMPurifyConfig;
-  // readonly blacklist?: StringOrArray;
-  // readonly blacklistKeys?: StringOrArray;
+  readonly blacklist?: StringOrArray;
+  readonly blacklistKeys?: StringOrArray;
   // readonly match?: string;
   // readonly max?: number;
   // readonly maxLength?: number;

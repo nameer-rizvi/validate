@@ -1,3 +1,577 @@
 const validate = require("../dist/cjs/index.js");
 
-console.log({ validate });
+const dictionary = [
+  {
+    key: "blacklistStringString",
+    blacklist: "def",
+  },
+  {
+    key: "blacklistStringArray",
+    blacklist: ["d", "e", "f"],
+  },
+  {
+    key: "blacklistArrayString",
+    blacklist: "def",
+  },
+  {
+    key: "blacklistArrayArray",
+    blacklist: ["d", "e", "f"],
+  },
+  // {
+  //   key: "blacklistKeys",
+  //   blacklistKeys: ["d"],
+  // },
+  // {
+  //   key: "match",
+  //   match: "test_blacklistStringString",
+  // },
+  // {
+  //   key: "max",
+  //   max: 10,
+  // },
+  // {
+  //   key: "maxLength",
+  //   maxLength: 3,
+  // },
+  // {
+  //   key: "maxLengthArray",
+  //   maxLengthArray: 3,
+  // },
+  // {
+  //   key: "maxLengthString",
+  //   maxLengthString: 3,
+  // },
+  // {
+  //   key: "maxLengthHtml",
+  //   maxLengthHtml: 3,
+  // },
+  // {
+  //   key: "maxLengthValueArray",
+  //   maxLengthValueArray: 3,
+  // },
+  // {
+  //   key: "maxLengthValueObject",
+  //   maxLengthValueObject: 3,
+  // },
+  // {
+  //   key: "maxValueArray",
+  //   maxValueArray: 3,
+  // },
+  // {
+  //   key: "maxValueObject",
+  //   maxValueObject: 3,
+  // },
+  // {
+  //   key: "maxWords",
+  //   maxWords: 3,
+  // },
+  // {
+  //   key: "maxWordsHtml",
+  //   maxWordsHtml: 3,
+  // },
+  // {
+  //   key: "min",
+  //   min: 3,
+  // },
+  // {
+  //   key: "minLength",
+  //   minLength: 3,
+  // },
+  // {
+  //   key: "minLengthArray",
+  //   minLengthArray: 3,
+  // },
+  // {
+  //   key: "minLengthString",
+  //   minLengthString: 3,
+  // },
+  // {
+  //   key: "minLengthHtml",
+  //   minLengthHtml: 3,
+  // },
+  // {
+  //   key: "minLengthValueArray",
+  //   minLengthValueArray: 3,
+  // },
+  // {
+  //   key: "minLengthValueObject",
+  //   minLengthValueObject: 3,
+  // },
+  // {
+  //   key: "minValueArray",
+  //   minValueArray: 3,
+  // },
+  // {
+  //   key: "minValueObject",
+  //   minValueObject: 3,
+  // },
+  // {
+  //   key: "minWords",
+  //   minWords: 3,
+  // },
+  // {
+  //   key: "minWordsHtml",
+  //   minWordsHtml: 3,
+  // },
+  // {
+  //   key: "regex-alphaNumeric",
+  //   regex: ["alphaNumeric"],
+  // },
+  // {
+  //   key: "regex-countryCode",
+  //   regex: ["countryCode"],
+  // },
+  // {
+  //   key: "regex-creditCard",
+  //   regex: ["creditCard"],
+  // },
+  // {
+  //   key: "regex-currencyAmount",
+  //   regex: ["currencyAmount"],
+  // },
+  // {
+  //   key: "regex-displayName",
+  //   regex: ["displayName"],
+  // },
+  // {
+  //   key: "regex-email",
+  //   regex: ["email"],
+  // },
+  // {
+  //   key: "regex-hexColor",
+  //   regex: ["hexColor"],
+  // },
+  // {
+  //   key: "regex-ipv4",
+  //   regex: ["ipv4"],
+  // },
+  // {
+  //   key: "regex-noEmoji",
+  //   regex: ["noEmoji"],
+  // },
+  // {
+  //   key: "regex-noHTML",
+  //   regex: ["noHTML"],
+  // },
+  // {
+  //   key: "regex-noSpecialChar",
+  //   regex: ["noSpecialChar"],
+  // },
+  // {
+  //   key: "regex-noWhitespace",
+  //   regex: ["noWhitespace"],
+  // },
+  // {
+  //   key: "regex-onlyLetters",
+  //   regex: ["onlyLetters"],
+  // },
+  // {
+  //   key: "regex-onlyNumbers",
+  //   regex: ["onlyNumbers"],
+  // },
+  // {
+  //   key: "regex-phoneNumber",
+  //   regex: ["phoneNumber"],
+  // },
+  // {
+  //   key: "regex-pinCode",
+  //   regex: ["pinCode"],
+  // },
+  // {
+  //   key: "regex-postalCodeUS",
+  //   regex: ["postalCodeUS"],
+  // },
+  // {
+  //   key: "regex-slug",
+  //   regex: ["slug"],
+  // },
+  // {
+  //   key: "regex-strongPassword",
+  //   regex: ["strongPassword"],
+  // },
+  // {
+  //   key: "regex-trimmed",
+  //   regex: ["trimmed"],
+  // },
+  // {
+  //   key: "regex-username",
+  //   regex: ["username"],
+  // },
+  // {
+  //   key: "regex-uuidV4",
+  //   regex: ["uuidV4"],
+  // },
+  // {
+  //   key: "regex-website",
+  //   regex: ["website"],
+  // },
+  // {
+  //   key: "type-array",
+  //   type: "array",
+  // },
+  // {
+  //   key: "type-arrayNonEmpty",
+  //   type: "arrayNonEmpty",
+  // },
+  // {
+  //   key: "type-arrayOrString",
+  //   type: "arrayOrString",
+  // },
+  // {
+  //   key: "type-base64",
+  //   type: "base64",
+  // },
+  // {
+  //   key: "type-boolean",
+  //   type: "boolean",
+  // },
+  // {
+  //   key: "type-booleanAny",
+  //   type: "booleanAny",
+  // },
+  // {
+  //   key: "type-booleanNumber",
+  //   type: "booleanNumber",
+  // },
+  // {
+  //   key: "type-booleanString",
+  //   type: "booleanString",
+  // },
+  // {
+  //   key: "type-creditCardNumber",
+  //   type: "creditCardNumber",
+  // },
+  // {
+  //   key: "type-date",
+  //   type: "date",
+  // },
+  // {
+  //   key: "type-email",
+  //   type: "email",
+  // },
+  // {
+  //   key: "type-error",
+  //   type: "error",
+  // },
+  // {
+  //   key: "type-function",
+  //   type: "function",
+  // },
+  // {
+  //   key: "type-http",
+  //   type: "http",
+  // },
+  // {
+  //   key: "type-json",
+  //   type: "json",
+  // },
+  // {
+  //   key: "type-jsonString",
+  //   type: "jsonString",
+  // },
+  // {
+  //   key: "type-jwt",
+  //   type: "jwt",
+  // },
+  // {
+  //   key: "type-module",
+  //   type: "module",
+  // },
+  // {
+  //   key: "type-number",
+  //   type: "number",
+  // },
+  // {
+  //   key: "type-numberString",
+  //   type: "numberString",
+  // },
+  // {
+  //   key: "type-numberValid",
+  //   type: "numberValid",
+  // },
+  // {
+  //   key: "type-numeric",
+  //   type: "numeric",
+  // },
+  // {
+  //   key: "type-object",
+  //   type: "object",
+  // },
+  // {
+  //   key: "type-objectNonEmpty",
+  //   type: "objectNonEmpty",
+  // },
+  // {
+  //   key: "type-phoneNumber",
+  //   type: "phoneNumber",
+  // },
+  // {
+  //   key: "type-regex",
+  //   type: "regex",
+  // },
+  // {
+  //   key: "type-string",
+  //   type: "string",
+  // },
+  // {
+  //   key: "type-stringNonEmpty",
+  //   type: "stringNonEmpty",
+  // },
+  // {
+  //   key: "type-stringOrArray",
+  //   type: "stringOrArray",
+  // },
+  // {
+  //   key: "type-stringSafe",
+  //   type: "stringSafe",
+  // },
+  // {
+  //   key: "type-url",
+  //   type: "url",
+  // },
+  // {
+  //   key: "type-url-string",
+  //   type: "urlString",
+  // },
+  // {
+  //   key: "type-valid",
+  //   type: "valid",
+  // },
+  // {
+  //   key: "typeValueArray",
+  //   typeValueArray: "string",
+  // },
+  // {
+  //   key: "typeValueObject",
+  //   typeValueObject: "string",
+  // },
+  // {
+  //   key: "whitelistStringString",
+  //   whitelist: "abc",
+  // },
+  // {
+  //   key: "whitelistStringArray",
+  //   whitelist: ["a", "b", "c"],
+  // },
+  // {
+  //   key: "whitelistArrayString",
+  //   whitelist: "abc",
+  // },
+  // {
+  //   key: "whitelistArrayArray",
+  //   whitelist: ["a", "b", "c"],
+  // },
+  // {
+  //   key: "whitelistKeys",
+  //   whitelistKeys: ["a", "b", "c"],
+  // },
+].map((i) => ({ ...i, key: `test_${i.key}` }));
+
+const payloadPass = {
+  blacklistStringString: "abc",
+  blacklistStringArray: "abc",
+  blacklistArrayString: ["abc"],
+  blacklistArrayArray: ["a", "b", "c"],
+  // blacklistKeys: { a: null, b: null, c: null },
+  // match: "abc",
+  // max: 10,
+  // maxLength: "abc",
+  // maxLengthArray: [1, 2, 3],
+  // maxLengthString: "abc",
+  // maxLengthHtml: "<p>abc</p>",
+  // maxLengthValueArray: ["a", "ab", "abc"],
+  // maxLengthValueObject: { key1: "a", key2: "ab", key3: "abc" },
+  // maxValueArray: [1, 2, 3],
+  // maxValueObject: { key1: 1, key2: 2, key3: 3 },
+  // maxWords: "a b c",
+  // maxWordsHtml: "<p> a b c </p>",
+  // min: 3,
+  // minLength: "abc",
+  // minLengthArray: [1, 2, 3],
+  // minLengthString: "abc",
+  // minLengthHtml: "<p>abc</p>",
+  // minLengthValueArray: ["abc", "abcd"],
+  // minLengthValueObject: { key1: "abc", key2: "abcd" },
+  // minValueArray: [3, 4],
+  // minValueObject: { key1: 3, key2: 4 },
+  // minWords: "a b c",
+  // minWordsHtml: "<p> a b c </p>",
+  // "regex-alphaNumeric": "User123",
+  // "regex-countryCode": "US",
+  // "regex-creditCard": "4242424242424242",
+  // "regex-currencyAmount": "19.99",
+  // "regex-displayName": "John Doe",
+  // "regex-email": "john.doe+test@gmail.com",
+  // "regex-hexColor": "#1A2B3C",
+  // "regex-ipv4": "192.168.1.1",
+  // "regex-noEmoji": "Hello world!",
+  // "regex-noHTML": "Just plain text",
+  // "regex-noSpecialChar": "User_Name123",
+  // "regex-noWhitespace": "NoSpacesHere",
+  // "regex-onlyLetters": "Alphabet",
+  // "regex-onlyNumbers": "123456",
+  // "regex-phoneNumber": "+14155552671",
+  // "regex-pinCode": "1234",
+  // "regex-postalCodeUS": "12345-6789",
+  // "regex-slug": "my-awesome-slug",
+  // "regex-strongPassword": "Str0ng!Passw0rd",
+  // "regex-trimmed": "Trimmed text",
+  // "regex-username": "user_name_1",
+  // "regex-uuidV4": "550e8400-e29b-41d4-a716-446655440000",
+  // "regex-website": "https://www.example.com",
+  // "type-array": [1, 2, 3],
+  // "type-arrayNonEmpty": ["item"],
+  // "type-arrayOrString": "hello",
+  // "type-base64": "SGVsbG8gd29ybGQ=",
+  // "type-boolean": true,
+  // "type-booleanAny": false,
+  // "type-booleanNumber": 1,
+  // "type-booleanString": "true",
+  // "type-creditCardNumber": "4242424242424242",
+  // "type-date": new Date().toISOString(),
+  // "type-email": "user@example.com",
+  // "type-error": new Error("Something went wrong"),
+  // "type-function": () => {},
+  // "type-http": "http://",
+  // "type-json": { key: "value" },
+  // "type-jsonString": '{"key":"value"}',
+  // "type-jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.e30.XYZ123",
+  // "type-module": "simpul",
+  // "type-number": 42,
+  // "type-numberString": "123",
+  // "type-numberValid": 3.14,
+  // "type-numeric": 0,
+  // "type-object": { foo: "bar" },
+  // "type-objectNonEmpty": { foo: "bar" },
+  // "type-phoneNumber": "14155552671",
+  // "type-regex": /^[a-z]+$/,
+  // "type-string": "hello",
+  // "type-stringNonEmpty": "world",
+  // "type-stringOrArray": ["hello", "world"],
+  // "type-stringSafe": "Safe_String-123",
+  // "type-url": new URL("https://www.example.com"),
+  // "type-url-string": "https://www.example.com",
+  // "type-valid": "anything",
+  // typeValueArray: ["a", "b", "c"],
+  // typeValueObject: { key1: "a", key2: "b", key3: "c" },
+  // whitelistStringString: "abc",
+  // whitelistStringArray: "a",
+  // whitelistArrayString: ["abc"],
+  // whitelistArrayArray: ["a", "b", "c"],
+  // whitelistKeys: { a: null, b: null, c: null },
+};
+
+const payloadFail = {
+  // blacklistStringString: "abcdef",
+  // blacklistStringArray: "def",
+  // blacklistArrayString: ["def"],
+  // blacklistArrayArray: ["d", "e", "f"],
+  // blacklistKeys: { a: null, b: null, c: null, d: null },
+  // match: "abcd",
+  // max: 11,
+  // maxLength: "abcd",
+  // maxLengthArray: [1, 2, 3, 4],
+  // maxLengthString: "abcd",
+  // maxLengthHtml: "<p>abcd</p>",
+  // maxLengthValueArray: ["a", "ab", "abc", "abcd"],
+  // maxLengthValueObject: { key1: "a", key2: "ab", key3: "abc", key4: "abcd" },
+  // maxValueArray: [1, 2, 3, 4],
+  // maxValueObject: { key1: 1, key2: 2, key3: 3, key4: 4 },
+  // maxWords: "a b c d",
+  // maxWordsHtml: "<p> a b c d </p>",
+  // min: 2,
+  // minLength: "ab",
+  // minLengthArray: [1, 2],
+  // minLengthString: "ab",
+  // minLengthHtml: "<p>ab</p>",
+  // minLengthValueArray: ["ab", "abc", "abcd"],
+  // minLengthValueObject: { key1: "ab", key2: "abc", key3: "abcd" },
+  // minValueArray: [2, 3, 4],
+  // minValueObject: { key1: 2, key2: 3, key3: 4 },
+  // minWords: "a b",
+  // minWordsHtml: "<p> a b </p>",
+  // "regex-alphaNumeric": "User_123",
+  // "regex-countryCode": "USA",
+  // "regex-creditCard": "4242-4242-4242-4242",
+  // "regex-currencyAmount": "19.9",
+  // "regex-displayName": "(John123+",
+  // "regex-email": "john.doe@@gmail.com",
+  // "regex-hexColor": "#12FG34",
+  // "regex-ipv4": "999.168.1.1",
+  // "regex-noEmoji": "Hello 👋",
+  // "regex-noHTML": "<b>Hello</b>",
+  // "regex-noSpecialChar": "User@Name",
+  // "regex-noWhitespace": "Has\nSpace",
+  // "regex-onlyLetters": "Alpha123",
+  // "regex-onlyNumbers": "123abc",
+  // "regex-phoneNumber": "+0123456789",
+  // "regex-pinCode": "12a4",
+  // "regex-postalCodeUS": "1234",
+  // "regex-slug": "My-Awesome-Slug",
+  // "regex-strongPassword": "password123",
+  // "regex-trimmed": "  Leading space",
+  // "regex-username": "1username",
+  // "regex-uuidV4": "550e8400-e29b-11d4-a716-446655440000",
+  // "regex-website": "htp://example..com",
+  // "type-array": "not an array",
+  // "type-arrayNonEmpty": [],
+  // "type-arrayOrString": 12345,
+  // "type-base64": "not-base64!",
+  // "type-boolean": "true",
+  // "type-booleanAny": "right",
+  // "type-booleanNumber": 2,
+  // "type-booleanString": "yes",
+  // "type-creditCardNumber": "1234-5678-9012-3456",
+  // "type-date": "2025-13-01",
+  // "type-email": "user@@example..com",
+  // "type-error": "not an error object",
+  // "type-function": 42,
+  // "type-http": "FTP/1.0",
+  // "type-json": undefined,
+  // "type-jsonString": "{missing quotes}",
+  // "type-jwt": 123,
+  // "type-module": "no",
+  // "type-number": "42",
+  // "type-numberString": "abc",
+  // "type-numberValid": "NaN",
+  // "type-numeric": "string",
+  // "type-object": "not-an-object",
+  // "type-objectNonEmpty": {},
+  // "type-phoneNumber": "asd",
+  // "type-regex": "not-a-regex",
+  // "type-string": 123,
+  // "type-stringNonEmpty": "",
+  // "type-stringOrArray": false,
+  // "type-stringSafe": "Unsafe!String@#",
+  // "type-url": "htp:/example..com",
+  // "type-url-string": "htp:/example..com--a-sdf-asdf-sad",
+  // "type-valid": null,
+  // typeValueArray: ["a", "b", 3],
+  // typeValueObject: { key1: "a", key2: "b", key3: 3 },
+  // whitelistStringString: "abcd",
+  // whitelistStringArray: "ab",
+  // whitelistArrayString: ["abc", "d"],
+  // whitelistArrayArray: ["a", "b", "c", "d"],
+  // whitelistKeys: { a: null, b: null, c: null, d: null },
+};
+
+changeKey(payloadPass);
+
+changeKey(payloadFail);
+
+Object.assign(payloadPass, payloadFail);
+
+try {
+  const requiredKeys = dictionary.map((i) => i.key);
+  validate(dictionary)(payloadPass, requiredKeys);
+  console.log(payloadPass);
+} catch (error) {
+  console.error(error);
+}
+
+function changeKey(payload) {
+  Object.keys(payload).forEach((key) => {
+    payload[`test_${key}`] = payload[key];
+    delete payload[key];
+  });
+}
