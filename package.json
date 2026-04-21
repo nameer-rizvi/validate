@@ -2,7 +2,7 @@
   "name": "@nameer/validate",
   "packageManager": "yarn@4.13.0",
   "version": "0.3.1",
-  "description": "todo",
+  "description": "An opinionated, fail-fast validation middleware designed for back-end safety, predictability, and performance.",
   "author": "Nameer Rizvi (https://github.com/nameer-rizvi)",
   "license": "MIT",
   "repository": {
