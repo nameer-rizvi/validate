@@ -46,7 +46,7 @@ try {
 On each call, the validator runs three steps in order:
 
 1. **Validate** — each value in the payload is checked against its definition rules.
-2. **Sanitize** — string, array, and object values are sanitized in place using DOMPurify. Dirty values (those that change after sanitization) throw an error.
+2. **Sanitize** — string values, including nested ones in arrays or objects, are sanitized in place using DOMPurify. Dirty values (those that change after sanitization) throw an error.
 3. **Check required** — verifies that all keys in the `required` list are present and non-empty after sanitization.
 
 ## Dictionary

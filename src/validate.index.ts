@@ -19,10 +19,10 @@ import minValueArray from "./validate.minValueArray.js";
 import minValueObject from "./validate.minValueObject.js";
 import minWords from "./validate.minWords.js";
 import minWordsHtml from "./validate.minWordsHtml.js";
-// import regex from "./validate.regex.js";
-// import typeValidation from "./validate.type.js";
-// import typeValueArray from "./validate.typeValueArray.js";
-// import typeValueObject from "./validate.typeValueObject.js";
+import regex from "./validate.regex.js";
+import typeValidation from "./validate.type.js";
+import typeValueArray from "./validate.typeValueArray.js";
+import typeValueObject from "./validate.typeValueObject.js";
 import whitelist from "./validate.whitelist.js";
 import whitelistKeys from "./validate.whitelistKeys.js";
 
@@ -52,10 +52,10 @@ export default {
   minValueObject,
   minWords,
   minWordsHtml,
-  // regex,
-  // type: typeValidation,
-  // typeValueArray,
-  // typeValueObject,
+  regex,
+  type: typeValidation,
+  typeValueArray,
+  typeValueObject,
   whitelist,
   whitelistKeys,
 };
