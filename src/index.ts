@@ -6,7 +6,7 @@ import {
   type PayloadObject,
   type RequiredList,
 } from "./interfaces.js";
-import * as utils from "@nameer/utils";
+import * as utilN from "@nameer/utils";
 import sanitized from "sanitized";
 import * as stringStripHtml from "string-strip-html";
 import validateIndex from "./validate.index.js";
@@ -58,12 +58,12 @@ function initializer(dictionary: Definition[], option: Options = {}) {
   });
 
   return function validator(payload?: PayloadObject, required?: RequiredList) {
-    if (!utils.isObject(payload)) return;
+    if (!utilN.isObject(payload)) return;
 
     for (const [key, value] of Object.entries(payload)) {
       const definition = getDefinition(defMap, key);
 
-      if (utils.isValid(value)) {
+      if (utilN.isValid(value)) {
         for (const [name, setting] of Object.entries(definition)) {
           const validation = validationResolver[name];
 
@@ -72,7 +72,7 @@ function initializer(dictionary: Definition[], option: Options = {}) {
           let matchV: unknown;
           let matchD: Definition | undefined;
 
-          if (name === "match" && utils.isString(setting)) {
+          if (name === "match" && utilN.isString(setting)) {
             matchV = payload[setting];
             matchD = getDefinition(defMap, setting);
           }
@@ -105,13 +105,13 @@ function initializer(dictionary: Definition[], option: Options = {}) {
     for (const requiredKey of required ?? []) {
       const value = payload[requiredKey];
 
-      const isValue = utils.isString(value)
+      const isValue = utilN.isString(value)
         ? requiredKey.toLowerCase().includes("html") ||
           requiredKey.toLowerCase().includes("rich_text") ||
           requiredKey.toLowerCase().includes("richtext")
           ? stringStripHtml.stripHtml(value).result.trim().length > 0
           : value.trim().length > 0
-        : utils.isValid(value);
+        : utilN.isValid(value);
 
       if (isValue === false) {
         const definition = getDefinition(defMap, requiredKey);

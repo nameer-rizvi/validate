@@ -1,10 +1,10 @@
 import { type ValidationOptions } from "./interfaces.js";
 import validateBlacklist from "./validate.blacklist.js";
-import * as utils from "@nameer/utils";
+import * as utilN from "@nameer/utils";
 
 function validateBlacklistKeys({ value, ...rest }: ValidationOptions): void {
   try {
-    if (utils.isObject(value)) {
+    if (utilN.isObject(value)) {
       validateBlacklist({ value: Object.keys(value), ...rest });
     }
   } catch (err) {

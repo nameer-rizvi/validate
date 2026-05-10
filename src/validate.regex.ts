@@ -1,5 +1,5 @@
 import { type RegexRule, type ValidationOptions } from "./interfaces.js";
-import * as utils from "@nameer/utils";
+import * as utilN from "@nameer/utils";
 import safeR from "safe-regex";
 
 const resolver: Record<string, RegexRule> = {
@@ -151,12 +151,12 @@ const resolver: Record<string, RegexRule> = {
 };
 
 function validateRegex({ label, setting, value }: ValidationOptions): void {
-  if (utils.isString(value) && utils.isArray(setting)) {
+  if (utilN.isString(value) && utilN.isArray(setting)) {
     for (const rule of setting) {
       const config: RegexRule | undefined =
         typeof rule === "string" ? resolver[rule] : (rule as RegexRule);
 
-      if (!utils.isObject(config)) {
+      if (!utilN.isObject(config)) {
         throw new Error(
           `Regex config for rule ("${String(rule)}") is undefined.`,
         );
